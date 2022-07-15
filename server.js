@@ -3,6 +3,8 @@ import express from 'express'
 import logger from 'morgan'
 import cors from 'cors'
 import formData from 'express-form-data'
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
@@ -10,6 +12,16 @@ import { router as authRouter } from './routes/auth.js'
 import './config/database.js'
 
 const app = express()
+const httpServer = createServer();
+const io = new Server(httpServer, { cors: {
+  origin: "http://localhost:3000", 
+} });
+
+io.on("connection", (socket) => {
+  console.log(`user connected: ${socket.id}`)
+});
+
+httpServer.listen(3000);
 
 app.use(cors())
 app.use(logger('dev'))
