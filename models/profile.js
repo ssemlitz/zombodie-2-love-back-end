@@ -9,8 +9,8 @@ const profileSchema = new mongoose.Schema({
   age: Number,
   height: Number,
   bio: String,
-  swiped: {type: Schema.Types.ObjectId, ref: 'Profile'},
-  liked: {type: Schema.Types.ObjectId, ref: 'Profile'},
+  swiped: [{type: Schema.Types.ObjectId, ref: 'Profile'}],
+  liked: [{type: Schema.Types.ObjectId, ref: 'Profile'}],
 },{
   timestamps: true,
 })
