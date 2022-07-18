@@ -43,8 +43,21 @@ function create (req, res) {
   })
 }
 
+function indexProfile(req, res) {
+  Profile.find({})
+  .populate("owner")
+  .then(profiles => {
+    res.json(profiles)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 export { 
   index,
   addPhoto, 
-  create
+  create,
+  indexProfile
 }
