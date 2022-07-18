@@ -4,7 +4,7 @@ const profileSchema = new mongoose.Schema({
   email: { type: String, required: true, lowercase: true, unique: true },
   name: {type: String},
   photo: { type: String },
-  species: { type: String, enum: ['human', 'zombie', 'halfbies']},
+  species: { type: String, enum: ['human', 'zombie', 'halfbie']},
   brains:{type: Boolean},
   prefersZombie: {type: Boolean},
   prefersHuman: {type: Boolean},
