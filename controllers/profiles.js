@@ -29,7 +29,22 @@ function addPhoto(req, res) {
   })
 }
 
+function create (req, res) {
+  req.body.owner = req.user.profile
+  Profile.create(req.body)
+  .then(profile => {
+    Profile.findById(profile._id)
+    .populate("owner")
+    res.json(populatedProfile)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 export { 
   index,
-  addPhoto
+  addPhoto, 
+  create
 }
