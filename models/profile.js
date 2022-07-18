@@ -6,13 +6,16 @@ const profileSchema = new mongoose.Schema({
   photo: { type: String },
   species: { type: String, enum: ['human', 'zombie', 'halfbies']},
   brains:{type: Boolean},
+  prefersZombie: {type: Boolean},
+  prefersHuman: {type: Boolean},
+  prefersHalfbie: {type: Boolean},
   age: {type: Number},
   height: {type: Number},
   bio: {type: String},
   owner:{type: mongoose.Schema.Types.ObjectId, ref: "Profile"}
   // swiped: [{type: Schema.Types.ObjectId, ref: 'Profile'}],
   // liked: [{type: Schema.Types.ObjectId, ref: 'Profile'}],
-},{
+}, {
   timestamps: true,
 })
 
