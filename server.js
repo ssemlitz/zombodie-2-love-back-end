@@ -7,7 +7,7 @@ import formData from 'express-form-data'
 
 import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
-import { router as conversationsRouter } from './routes/conversations.js'
+// import { router as conversationsRouter } from './routes/conversations.js'
 
 
 import './config/database.js'
@@ -21,7 +21,7 @@ app.use(formData.parse())
 
 app.use('/api/profiles', profilesRouter)
 app.use('/api/auth', authRouter)
-app.use('/api/conversations', conversationsRouter)
+// app.use('/api/conversations', conversationsRouter)
 
 app.use(function (req, res, next) {
   res.status(404).json({ err: 'Not found' })
