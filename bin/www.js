@@ -5,6 +5,7 @@
 import { app } from '../server.js'
 import debug from 'debug'
 import http from 'http'
+import { Server } from 'socket.io'
 
 /**
  * Get port from environment and store in Express.
@@ -18,6 +19,49 @@ app.set('port', port)
  */
 
 const server = http.createServer(app)
+const io = new Server()
+io.attach(server,  {
+  cors: {
+    origin: 'http://localhost:3000'
+  }
+})
+
+let matchedProfiles = []
+
+io.on('connection', (socket) => {
+  console.log(`user connected: ${socket.id}`)
+
+  socket.on('new-profile-add', (newProfileId) => {
+    if(newProfileId && !matchedProfiles.some((profile) => profile.profileId === newProfileId)) {
+      matchedProfiles.push({
+        profileId: newProfileId,
+        socketId: socket.id
+      })
+    }
+    console.log(matchedProfiles)
+    io.emit('get-profiles', matchedProfiles)
+  })
+
+  socket.on("send-message", (data)=> {
+    const receiverId = data.receiverId
+    console.log(matchedProfiles, receiverId);
+    const profile = matchedProfiles.find((profile) => profile.profileId === receiverId)
+    console.log(profile);
+    console.log("Sending from socket to : ", receiverId)
+    if(profile){
+      io.to(profile.socketId).emit("receive-message", data)
+    }
+  })
+
+  socket.on("disconnect", () => {
+    console.log(`user disconnected: ${socket.id}`);
+    matchedProfiles = matchedProfiles.filter((profile) => profile.socketId !== socket.id)
+    io.emit('get-profiles', matchedProfiles)
+    console.log(matchedProfiles);
+  })
+});
+
+
 
 /**
  * Listen on provided port, on all network interfaces.

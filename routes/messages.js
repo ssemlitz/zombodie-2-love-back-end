@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as conversationsCtrl from '../controllers/conversations.js'
+import * as messagesCtrl from '../controllers/messages.js'
 import { decodeUserFromToken, checkAuth } from '../middleware/auth.js'
 
 const router = Router()
@@ -9,7 +9,6 @@ const router = Router()
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
-router.post('/', conversationsCtrl.create)
-router.get('/:userId', checkAuth, conversationsCtrl.show)
-router.get('/find/:firstId/:secondId', checkAuth, conversationsCtrl.findChat)
+router.post('/', checkAuth, messagesCtrl.create)
+router.get('/:chatId', checkAuth, messagesCtrl.show)
 export { router }

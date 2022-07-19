@@ -1,7 +1,15 @@
-const io = new Server(httpServer, { 
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+const httpServer = createServer();
+const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000", 
+  origin: "http://localhost:3000", 
 } });
+
+
+httpServer.listen(3000);
+
 
 let users = [];
 
@@ -19,7 +27,7 @@ const getUser = (userId) => {
 };
 
 io.on("connection", (socket) => {
-  //when ceonnect
+  //when connect
   console.log(`user connected: ${socket.id}`);
 
   //take userId and socketId from user
