@@ -1,19 +1,13 @@
 import mongoose from 'mongoose'
 
-const messageSchema = new mongoose.Schema({
-  conversationId: {type: String},
-  sender: {type: String},
-  text: {type: String}
-})
+const Schema = mongoose.Schema
 
-const conversationSchema = new mongoose.Schema({
-  participants: {type: Array},
-  messages: [messageSchema],
+const conversationSchema = new Schema({
+  participants: [{type: Schema.Types.ObjectId, ref: 'Profile'}]
 }, {
   timestamps: true
 }
 )
-
 
 
 const Conversation = mongoose.model('Conversation', conversationSchema)
