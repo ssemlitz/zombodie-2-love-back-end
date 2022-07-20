@@ -77,21 +77,22 @@ function indexProfile(req, res) {
     res.status(500).json(err)
   })
 }
+
+
 function show (req,res) {
+  console.log(req.params.id, "I AM WORKING")
   Profile.findById(req.params.id)
   .then(profile => {
-        profile.species = req.params.species
-        .then(id=>
-          res.json(id)
-          )
+        console.log(profile, "ANYTHING?")
+        res.json(profile)
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).json(err)
+      })
 
-  })
-  .catch(err => {
-    console.log(err)
-    res.status(500).json(err)
-  })
-  
-}
+  }
+
 
 export { 
   index,
