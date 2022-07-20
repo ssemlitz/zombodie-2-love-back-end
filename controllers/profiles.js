@@ -80,10 +80,8 @@ function indexProfile(req, res) {
 
 
 function show (req,res) {
-  console.log(req.params.id, "I AM WORKING")
   Profile.findById(req.params.id)
   .then(profile => {
-        console.log(profile, "ANYTHING?")
         res.json(profile)
       })
       .catch(err => {
