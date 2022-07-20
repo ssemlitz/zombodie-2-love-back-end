@@ -43,8 +43,7 @@ function create (req, res) {
     res.status(500).json(err)
   })
 }
-function update (req, res) {
-  console.log("******", req.body) 
+function update (req, res) { 
   if(req.body.age) {
     req.body.age = parseInt(req.body.age)
     req.body.height = parseInt(req.body.height)
