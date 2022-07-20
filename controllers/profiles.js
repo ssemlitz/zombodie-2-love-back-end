@@ -44,21 +44,25 @@ function create (req, res) {
   })
 }
 function update (req, res) {
-  console.log(req.body)
-  Profile.findById(req.user.profile)
+  console.log("******", req.body) 
+  if(req.body.age) {
+    req.body.age = parseInt(req.body.age)
+    req.body.height = parseInt(req.body.height)
+  }
+  Profile.findByIdAndUpdate(req.user.profile, req.body, {new:true})
   .then(profile => {
-    profile.species = req.body.species
-    profile.brains = req.body.brains
-    profile.prefersZombie = req.body.prefersZombie
-    profile.prefersHuman = req.body.prefersHuman
-    profile.prefersHalfbie = req.body.prefersHalfbie
-    profile.age = parseInt(req.body.age)
-    profile.height = parseInt(req.body.height)
-    profile.bio = req.body.bio
-    profile.save()
-      .then(savedProfile => {
-        res.json(savedProfile)
-      })
+    // profile.species = req.body.species
+    // profile.brains = req.body.brains
+    // profile.prefersZombie = req.body.prefersZombie
+    // profile.prefersHuman = req.body.prefersHuman
+    // profile.prefersHalfbie = req.body.prefersHalfbie
+    // profile.age = parseInt(req.body.age)
+    // profile.height = parseInt(req.body.height)
+    // profile.bio = req.body.bio
+    // profile.save()
+    //   .then(savedProfile => {
+        res.json(profile)
+      // })
   })
   .catch(err => {
     console.log(err)
