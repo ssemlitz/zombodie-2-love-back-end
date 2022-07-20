@@ -11,7 +11,7 @@ router.get("/:id", profilesCtrl.show)
 router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
 router.post("/", checkAuth, profilesCtrl.create)
-router.put("/", checkAuth, profilesCtrl.update)
+router.put("/:id", checkAuth, profilesCtrl.update)
 router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
 
 export { router }
