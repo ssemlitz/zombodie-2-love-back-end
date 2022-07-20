@@ -81,10 +81,25 @@ function indexProfile(req, res) {
   })
 }
 
+
+function show (req,res) {
+  Profile.findById(req.params.id)
+  .then(profile => {
+        res.json(profile)
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).json(err)
+      })
+
+  }
+
+
 export { 
   index,
   addPhoto, 
   create,
   indexProfile, 
-  update
+  update, 
+  show
 }
