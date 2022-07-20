@@ -7,7 +7,7 @@ import formData from 'express-form-data'
 
 import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
-import { router as conversationsRouter } from './routes/conversations.js'
+import { router as chatsRouter } from './routes/chats.js'
 import { router as messagesRouter } from './routes/messages.js'
 
 
@@ -22,7 +22,7 @@ app.use(formData.parse())
 
 app.use('/api/profiles', profilesRouter)
 app.use('/api/auth', authRouter)
-app.use('/api/conversations', conversationsRouter)
+app.use('/api/chats', chatsRouter)
 app.use('/api/messages', messagesRouter)
 
 app.use(function (req, res, next) {
