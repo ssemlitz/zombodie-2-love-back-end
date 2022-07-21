@@ -11,4 +11,5 @@ const router = Router()
 router.use(decodeUserFromToken)
 router.post('/', checkAuth, messagesCtrl.create)
 router.get('/:chatId', checkAuth, messagesCtrl.show)
+router.delete('/:chatId', checkAuth, messagesCtrl.delete)
 export { router }

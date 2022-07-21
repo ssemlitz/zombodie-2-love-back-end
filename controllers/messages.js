@@ -26,7 +26,20 @@ async function show(req, res) {
   }
 }
 
+async function deleteChat(req, res) {
+  const {chatId} = req.params
+  
+  try{
+    const unmatched =  await Message.findByIdAndDelete({chatId:chatId})
+    res.status(200).json(unmatched)
+  }
+  catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
-  show
+  show,
+  deleteChat as delete
 }
