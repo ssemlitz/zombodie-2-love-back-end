@@ -81,10 +81,31 @@ function indexProfile(req, res) {
   })
 }
 
+function liked (req, res) {
+  console.log(req.params.likedId)
+  console.log(req.params.id);
+  Profile.findById(req.params.id)
+  .then(myProfile => {
+    Profile.findById(req.params.likedId)
+    .then(profile => {
+      myProfile.liked.push(profile)
+      myProfile.save()
+      .then(() => {
+        res.json(myProfile)
+      })
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 export { 
   index,
   addPhoto, 
   create,
   indexProfile, 
-  update
+  update,
+  liked
 }
