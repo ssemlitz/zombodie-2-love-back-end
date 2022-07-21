@@ -91,7 +91,7 @@ function liked (req, res) {
       myProfile.liked.push(profile)
       myProfile.save()
       .then(() => {
-        res.json(myProfile)
+        res.json({myProfile:myProfile, likedProfile:profile})
       })
     })
   })
