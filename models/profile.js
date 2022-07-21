@@ -14,9 +14,9 @@ const profileSchema = new Schema({
   age: {type: Number},
   height: {type: Number},
   bio: {type: String},
-  owner:{type: mongoose.Schema.Types.ObjectId, ref: "Profile"}
-  // swiped: [{type: Schema.Types.ObjectId, ref: 'Profile'}],
-  // liked: [{type: Schema.Types.ObjectId, ref: 'Profile'}],
+  owner:{type: mongoose.Schema.Types.ObjectId, ref: "Profile"},
+  disliked: [{type: Schema.Types.ObjectId, ref: 'Profile'}],
+  liked: [{type: Schema.Types.ObjectId, ref: 'Profile'}],
 }, {
   timestamps: true,
 })

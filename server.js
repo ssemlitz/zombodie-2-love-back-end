@@ -22,7 +22,7 @@ app.use(formData.parse())
 
 app.use('/api/profiles', profilesRouter)
 app.use('/api/auth', authRouter)
-app.use('/api/chats', chatsRouter)
+app.use('/api/chat', chatsRouter)
 app.use('/api/messages', messagesRouter)
 
 app.use(function (req, res, next) {
