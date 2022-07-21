@@ -111,7 +111,7 @@ function disliked (req, res) {
       myProfile.disliked.push(profile)
       myProfile.save()
       .then(() => {
-        res.json(profile)
+        res.json(myProfile)
       })
     })
   })
