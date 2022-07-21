@@ -130,9 +130,25 @@ function show (req,res) {
         console.log(err)
         res.status(500).json(err)
       })
-
   }
 
+  function deleteOne(req, res) {
+    Profile.findById(req.params.id)
+    .then(profile => {
+      if (profile._id.equals(req.user.profile)) {
+        Profile.findByIdAndDelete(profile._id)
+        .then(deletedProfile => {
+          res.json(deletedProfile)
+        })
+      } else {
+        res.status(401).json({err: "Not authorized!"})
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({err: err.errmsg})
+    })
+  }
 
 export { 
   index,
@@ -142,5 +158,6 @@ export {
   liked,
   update, 
   show,
-  disliked
+  disliked,
+  deleteOne as delete
 }
