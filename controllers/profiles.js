@@ -101,6 +101,26 @@ function liked (req, res) {
   })
 }
 
+function disliked (req, res) {
+  console.log(req.params.dislikedId)
+  console.log(req.params.id);
+  Profile.findById(req.params.id)
+  .then(myProfile => {
+    Profile.findById(req.params.dislikedId)
+    .then(profile => {
+      myProfile.disliked.push(profile)
+      myProfile.save()
+      .then(() => {
+        res.json(profile)
+      })
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 function show (req,res) {
   Profile.findById(req.params.id)
   .then(profile => {
@@ -121,5 +141,6 @@ export {
   indexProfile, 
   liked,
   update, 
-  show
+  show,
+  disliked
 }
