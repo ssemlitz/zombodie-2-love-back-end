@@ -12,6 +12,7 @@ router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
 router.post("/", checkAuth, profilesCtrl.create)
 router.put('/:id/likes/:likedId', checkAuth, profilesCtrl.liked)
+router.put('/:id/dislikes/:dislikedId', checkAuth, profilesCtrl.disliked)
 router.put("/:id", checkAuth, profilesCtrl.update)
 router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
 
