@@ -6,7 +6,7 @@ const profileSchema = new Schema({
   email: { type: String, required: true, lowercase: true, unique: true },
   name: {type: String},
   photo: { type: String },
-  species: { type: String, enum: ['human', 'zombie', 'halfbie']},
+  species: { type: String, enum: ['Human', 'Zombie', 'Halfbie']},
   brains:{type: Boolean},
   prefersZombie: {type: Boolean},
   prefersHuman: {type: Boolean},
