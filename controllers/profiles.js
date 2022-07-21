@@ -101,6 +101,26 @@ function liked (req, res) {
   })
 }
 
+function disliked (req, res) {
+  console.log(req.params.dislikedId)
+  console.log(req.params.id);
+  Profile.findById(req.params.id)
+  .then(myProfile => {
+    Profile.findById(req.params.dislikedId)
+    .then(profile => {
+      myProfile.disliked.push(profile)
+      myProfile.save()
+      .then(() => {
+        res.json(myProfile)
+      })
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 function show (req,res) {
   Profile.findById(req.params.id)
   .then(profile => {
@@ -110,9 +130,25 @@ function show (req,res) {
         console.log(err)
         res.status(500).json(err)
       })
-
   }
 
+  function deleteOne(req, res) {
+    Profile.findById(req.params.id)
+    .then(profile => {
+      if (profile._id.equals(req.user.profile)) {
+        Profile.findByIdAndDelete(profile._id)
+        .then(deletedProfile => {
+          res.json(deletedProfile)
+        })
+      } else {
+        res.status(401).json({err: "Not authorized!"})
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({err: err.errmsg})
+    })
+  }
 
 export { 
   index,
@@ -121,5 +157,7 @@ export {
   indexProfile, 
   liked,
   update, 
-  show
+  show,
+  disliked,
+  deleteOne as delete
 }

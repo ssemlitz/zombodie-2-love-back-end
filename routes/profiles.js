@@ -5,14 +5,16 @@ import { decodeUserFromToken, checkAuth } from '../middleware/auth.js'
 const router = Router()
 
 /*---------- Public Routes ----------*/
-router.get("/:id", profilesCtrl.show)
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
+router.get("/:id", checkAuth, profilesCtrl.show)
 router.post("/", checkAuth, profilesCtrl.create)
 router.put('/:id/likes/:likedId', checkAuth, profilesCtrl.liked)
+router.put('/:id/dislikes/:dislikedId', checkAuth, profilesCtrl.disliked)
 router.put("/:id", checkAuth, profilesCtrl.update)
 router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
+router.delete('/:id', checkAuth, profilesCtrl.delete)
 
 export { router }
