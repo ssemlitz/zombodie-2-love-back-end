@@ -22,7 +22,7 @@ const server = http.createServer(app)
 const io = new Server()
 io.attach(server,  {
   cors: {
-    origin: 'http://localhost:3000'
+    origin: '*'
   }
 })
 
